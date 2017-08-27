@@ -1,0 +1,45 @@
+app-slots {
+    display: block;
+    padding: 20px;
+    .container-fluid {
+        .row {
+            .slot-days {
+                .row {
+                    .slot-day {
+                        border: solid 1px gray;
+                        padding: 10px;
+
+                        .slot {
+                            border: solid 1px red;
+                            border-radius: 10px;
+                            margin-bottom: 5px;
+                            padding: 5px;
+                        }
+                        
+                        .slot.available {
+                            border-color: green;
+                            cursor: pointer;
+                        }
+
+                        .slot.reserved {
+                            border-color: yellow;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    .info {
+        .available {
+            color: green;
+        }
+        .reserved {
+            color: yellow;
+        }
+        .scheduled {
+            color: red;
+        }
+    }
+}

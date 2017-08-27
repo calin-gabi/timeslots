@@ -1,0 +1,34 @@
+<h2>Slots calendar</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="slot-days col-lg-8 col-md-8">
+        <div class="row">
+            <div class="slot-day col-lg-2 col-md-2" *ngFor="let slotDay of slotDays" >
+              {{slotDay.date | date: 'dd MMM yyyy'  }}
+              <div *ngFor="let slot of slotDay.slots" class="slot" [class.reserved]="slot.reserved" [class.available]="slot.available" (click)="selectSlot(slot)">
+                {{slot.startTime.substring(11, 16) }} - {{ slot.endTime.substring(11, 16)}}
+              </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="slot-editor col-lg-4 col-md-4" *ngIf="currentSlot">
+      {{currentSlot.id}}
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" id="name" type="text">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" type="email">
+        <label for="phonenumber">Phone number</label>
+        <input class="form-control" id="phonenumber" type="tel">
+      </div>
+      <button class="btn btn-primary" type="button" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</div>
+<div class="info">
+    <h3>Note</h3>
+    <h5 class="available">available slots</h5>
+    <h5 class="reserved">reserved slots</h5>
+    <h5 class="scheduled">scheduled slots</h5>
+</div>
