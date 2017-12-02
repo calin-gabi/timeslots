@@ -1,10 +1,10 @@
-import { SlotsReducer, ISlotsStore } from './slots.reducer';
-import { NgRedux, DevToolsExtension, NgReduxModule } from '@angular-redux/store';
-import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
-import { NgModule, ModuleWithProviders, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { createLogger } from 'redux-logger';
 import { routerReducer } from '@angular-redux/router';
+import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store';
+import { CommonModule } from '@angular/common';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
+import { ISlotsStore, SlotsReducer } from './slots.reducer';
 
 declare var require: any;
 

@@ -1,6 +1,6 @@
-import { IAppState } from '../../core/store/store.module';
 import { NgRedux } from '@angular-redux/store';
 import { Injectable } from '@angular/core';
+import { IAppState } from '../../core/store/store.module';
 
 @Injectable()
 export class SlotsActions {
@@ -18,8 +18,7 @@ export class SlotsActions {
     }
 
     public saveSlot(slot: {} ) {
-        const payload_ = {slot: slot};
+        const payload_ = { slot };
         return this._ngRedux.dispatch({type: SlotsActions.SAVE_SLOT, payload: payload_});
     }
 }
-
