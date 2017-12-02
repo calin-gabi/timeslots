@@ -95,25 +95,28 @@ export class SlotsComponent implements OnInit {
   ngOnInit() {
     this._slotsService.getSlots().subscribe(
       (res) => {
-        const slotsRaw = res.json();
-        const slotDays: Array<SlotDay> = [];
-        for (let i = 0; i < slotsRaw.length; i++) {
-          const slotRaw = slotsRaw[i];
-          const slotDay = new Date(slotRaw.startTime.substring(0, 10));
-          const currentDayIdx = slotDays.findIndex((elem) => {
-            return elem.date.toString() === slotDay.toString();
-          });
-          if (currentDayIdx > -1) {
-            const currentDay: SlotDay = slotDays[currentDayIdx];
-            const slot = new Slot(slotRaw);
-            currentDay.slots.push(slot);
-          } else {
-            const slot = new Slot(slotRaw);
-            const currentDay = new SlotDay({date: slotDay, slots: [slot]});
-            slotDays.push(currentDay);
+        const _slots = this._ngRedux.getState().slots;
+        if (!_slots || _slots.SlotDays.length === 0) {
+          const slotsRaw = res.json();
+          const slotDays: Array<SlotDay> = [];
+          for (let i = 0; i < slotsRaw.length; i++) {
+            const slotRaw = slotsRaw[i];
+            const slotDay = new Date(slotRaw.startTime.substring(0, 10));
+            const currentDayIdx = slotDays.findIndex((elem) => {
+              return elem.date.toString() === slotDay.toString();
+            });
+            if (currentDayIdx > -1) {
+              const currentDay: SlotDay = slotDays[currentDayIdx];
+              const slot = new Slot(slotRaw);
+              currentDay.slots.push(slot);
+            } else {
+              const slot = new Slot(slotRaw);
+              const currentDay = new SlotDay({date: slotDay, slots: [slot]});
+              slotDays.push(currentDay);
+            }
           }
+          this._slotsActions.saveSlots(slotDays);
         }
-        this._slotsActions.saveSlots(slotDays);
       },
       (err) => {
         console.log(err);

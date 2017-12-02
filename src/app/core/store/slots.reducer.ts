@@ -20,6 +20,9 @@ export function SlotsReducer(state: ISlotsStore = INITIAL_STATE,
             const rec: ISlot = action.payload.slot;
             const recDay = rec.startTime.toString().substring(0 , 10);
             const dayIdx = state.SlotDays.findIndex((elem) => {
+                if (typeof elem.date === 'string') {
+                  elem.date = new Date(elem.date);
+                }
                 return elem.date.toISOString().substring(0 , 10) === recDay;
             });
             if (dayIdx > -1) {
