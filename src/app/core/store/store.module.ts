@@ -1,9 +1,10 @@
 import { SlotsReducer, ISlotsStore } from './slots.reducer';
 import { NgRedux, DevToolsExtension, NgReduxModule } from '@angular-redux/store';
-import { combineReducers, applyMiddleware, createStore } from 'redux';
+import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import { NgModule, ModuleWithProviders, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { createLogger } from 'redux-logger';
+import { routerReducer } from '@angular-redux/router';
 
 declare var require: any;
 
@@ -14,11 +15,12 @@ export interface IAppState {
 }
 
 export const ROOT_REDUCER = combineReducers<IAppState> ({
-  slots: SlotsReducer
+  slots: SlotsReducer,
+  router: routerReducer
 });
 
 export const ENHANCERS = [
-PERSIST_STATE('counter', { key: '@angular-redux/store/examples/counter' })
+PERSIST_STATE('slots', { key: '@angular-redux/store/slots' })
 ];
 
 @NgModule({
@@ -46,7 +48,7 @@ export class StoreModule {
     store.configureStore(
       ROOT_REDUCER,
       {},
-      [ createLogger()],
-      devTools.isEnabled() ? [ devTools.enhancer() ] : []);
+      [createLogger()],
+      [...ENHANCERS, devTool.isEnabled() ? devTool.enhancer() : (f) => f]);
   }
 }

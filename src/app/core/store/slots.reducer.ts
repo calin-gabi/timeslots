@@ -19,15 +19,11 @@ export function SlotsReducer(state: ISlotsStore = INITIAL_STATE,
         case SlotsActions.SAVE_SLOT:
             const rec: ISlot = action.payload.slot;
             const recDay = rec.startTime.toString().substring(0 , 10);
-            // console.log(recDay);
             const dayIdx = state.SlotDays.findIndex((elem) => {
-                // console.log(elem.date.toISOString().substring(0 , 10));
                 return elem.date.toISOString().substring(0 , 10) === recDay;
             });
-            console.log(dayIdx);
             if (dayIdx > -1) {
                 const slots = state.SlotDays[dayIdx].slots;
-                console.log(slots);
                 const recId = rec.id;
                 const slotIdx = slots.findIndex((elem) => {
                     return elem.id === recId;

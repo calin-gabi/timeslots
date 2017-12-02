@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@angular-redux/form": "^6.6.0",
+    "@angular-redux/router": "^7.0.0",
     "@angular-redux/store": "^6.5.7",
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
