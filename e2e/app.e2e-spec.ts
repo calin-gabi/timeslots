@@ -1,10 +1,10 @@
-import { timeslotsPage } from './app.po';
+import { TimeslotsPage } from './app.po';
 
 describe('timeslots App', () => {
-  let page: timeslotsPage;
+  let page: TimeslotsPage;
 
   beforeEach(() => {
-    page = new timeslotsPage();
+    page = new TimeslotsPage();
   });
 
   it('should display welcome message', () => {

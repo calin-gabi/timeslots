@@ -1,15 +1,14 @@
-import { PubNubAngular } from 'pubnub-angular2';
-import { FormsModule } from '@angular/forms';
-import { DebugElement } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
-import { SlotsService } from './components/slots/slots.service';
 import { NgRedux } from '@angular-redux/store';
+import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { Http, HttpModule } from '@angular/http';
+import { PubNubAngular } from 'pubnub-angular2';
+import { AppComponent } from './app.component';
 import { SlotsActions } from './components/slots/slots.actions';
 import { SlotsComponent } from './components/slots/slots.component';
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { SlotsService } from './components/slots/slots.service';
 import { AbstractMockObservableService } from './core/abstract-mock-observable.spec';
-
 
 class MockService extends AbstractMockObservableService {
   getSlots() {

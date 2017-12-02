@@ -2,20 +2,20 @@ import { ISlotDay } from './slots';
 
 export interface ISlotDay {
     date: Date;
-    slots: Array<ISlot>;
+    slots: ISlot[];
 }
 
 export interface ISlot {
-    id: String;
-    startTime: String;
-    endTime: String;
+    id: string;
+    startTime: string;
+    endTime: string;
     available: boolean;
     reserved: boolean;
 }
 
 export class SlotDay implements ISlotDay {
     public date: Date;
-    public slots: Array<ISlot>;
+    public slots: Slot[];
 
     constructor(elem: any) {
         this.date = new Date(elem.date);
@@ -24,9 +24,9 @@ export class SlotDay implements ISlotDay {
 }
 
 export class Slot implements ISlot {
-    public id: String;
-    public startTime: String;
-    public endTime: String;
+    public id: string;
+    public startTime: string;
+    public endTime: string;
     public available: boolean;
     public reserved: boolean;
 

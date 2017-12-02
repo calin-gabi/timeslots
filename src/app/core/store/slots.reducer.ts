@@ -1,10 +1,10 @@
-import { SlotsActions } from './../../components/slots/slots.actions';
-import { SlotDay, ISlotDay, Slot, ISlot } from './../../components/slots/slots';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { ISlot, ISlotDay, Slot, SlotDay } from './../../components/slots/slots';
+import { SlotsActions } from './../../components/slots/slots.actions';
 
 export interface ISlotsStore {
-    SlotDays: Array<ISlotDay>;
+    SlotDays: ISlotDay[];
 }
 
 export const INITIAL_STATE: ISlotsStore = {

@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
