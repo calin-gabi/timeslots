@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
-import { SlotsService } from './slots.service';
 import { SlotsActions } from './slots.actions';
 import { SlotsComponent } from './slots.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SlotsService } from './slots.service';
 
 @NgModule({
   imports: [

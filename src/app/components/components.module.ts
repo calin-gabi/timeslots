@@ -1,8 +1,8 @@
 import { NgRedux } from '@angular-redux/store';
-import { SlotsModule } from './slots/slots.module';
-import { SlotsActions } from './slots/slots.actions';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { SlotsActions } from './slots/slots.actions';
+import { SlotsModule } from './slots/slots.module';
 
 @NgModule({
   declarations: [],

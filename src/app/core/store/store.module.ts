@@ -3,12 +3,10 @@ import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store'
 import { CommonModule } from '@angular/common';
 import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import PERSIST_STATE from 'redux-localstorage';
 import { createLogger } from 'redux-logger';
 import { ISlotsStore, SlotsReducer } from './slots.reducer';
-
-declare var require: any;
-
-const PERSIST_STATE = require('redux-localstorage');
+// const PERSIST_STATE = require('redux-localstorage');
 
 export interface IAppState {
   slots?: ISlotsStore;

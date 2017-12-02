@@ -26,8 +26,6 @@
     "@angular/router": "^4.0.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "i": "^0.3.6",
-    "npm": "^5.5.1",
     "pubnub": "^4.15.1",
     "pubnub-angular2": "^1.1.0",
     "redux": "^3.7.2",
@@ -35,8 +33,6 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.16.0",
     "rxjs": "^5.4.1",
-    "tslint-consistent-codestyle": "^1.10.2",
-    "tslint-loader": "^3.5.3",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

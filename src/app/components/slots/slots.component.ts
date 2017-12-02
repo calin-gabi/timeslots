@@ -1,12 +1,11 @@
-import { PubNubAngular } from 'pubnub-angular2';
-import { SlotsService } from './slots.service';
-import { IAppState } from './../../core/store/store.module';
-import { NgRedux } from '@angular-redux/store';
-import { SlotsActions } from './slots.actions';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { select } from '@angular-redux/store';
+import { PubNubAngular } from 'pubnub-angular2';
 import { Observable } from 'rxjs/Rx';
-import { SlotDay, ISlotDay, Slot, ISlot } from './../../components/slots/slots';
+import { ISlot, ISlotDay, Slot, SlotDay } from './../../components/slots/slots';
+import { IAppState } from './../../core/store/store.module';
+import { SlotsActions } from './slots.actions';
+import { SlotsService } from './slots.service';
 
 @Component({
   selector: 'app-slots',
@@ -16,7 +15,7 @@ import { SlotDay, ISlotDay, Slot, ISlot } from './../../components/slots/slots';
 })
 
 export class SlotsComponent implements OnInit {
-  public slotDays: Array<ISlotDay>;
+  public slotDays: ISlotDay[];
   public currentSlot: ISlot;
 
   @select(['slots', 'SlotDays'])
@@ -42,13 +41,12 @@ export class SlotsComponent implements OnInit {
         channels: [this._channel],
         triggerEvents: ['message']
       });
-      _pubNub.getMessage(this._channel, function(res) {
+      _pubNub.getMessage(this._channel, (res) => {
         const slot = JSON.parse(res.message.slot);
         _slotsActions.saveSlot(slot);
       });
     }
   }
-
 
   public selectSlot(slot: ISlot) {
     if (slot.available) {
@@ -98,23 +96,22 @@ export class SlotsComponent implements OnInit {
         const _slots = this._ngRedux.getState().slots;
         if (!_slots || _slots.SlotDays.length === 0) {
           const slotsRaw = res.json();
-          const slotDays: Array<SlotDay> = [];
-          for (let i = 0; i < slotsRaw.length; i++) {
-            const slotRaw = slotsRaw[i];
-            const slotDay = new Date(slotRaw.startTime.substring(0, 10));
+          const slotDays: SlotDay[] = [];
+          slotsRaw.forEach((element) => {
+            const slotDay = new Date(element.startTime.substring(0, 10));
             const currentDayIdx = slotDays.findIndex((elem) => {
               return elem.date.toString() === slotDay.toString();
             });
             if (currentDayIdx > -1) {
               const currentDay: SlotDay = slotDays[currentDayIdx];
-              const slot = new Slot(slotRaw);
+              const slot = new Slot(element);
               currentDay.slots.push(slot);
             } else {
-              const slot = new Slot(slotRaw);
+              const slot = new Slot(element);
               const currentDay = new SlotDay({date: slotDay, slots: [slot]});
               slotDays.push(currentDay);
             }
-          }
+          });
           this._slotsActions.saveSlots(slotDays);
         }
       },
