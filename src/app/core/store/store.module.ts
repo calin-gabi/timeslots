@@ -3,9 +3,10 @@ import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store'
 import { CommonModule } from '@angular/common';
 import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import PERSIST_STATE from 'redux-localstorage';
+import persistState from 'redux-localstorage';
 import { createLogger } from 'redux-logger';
 import { ISlotsStore, SlotsReducer } from './slots.reducer';
+import { getConfig } from '../../../environments/environment';
 // const PERSIST_STATE = require('redux-localstorage');
 
 export interface IAppState {
@@ -17,8 +18,8 @@ export const ROOT_REDUCER = combineReducers<IAppState> ({
   router: routerReducer
 });
 
-export const ENHANCERS = [
-PERSIST_STATE('slots', { key: '@angular-redux/store/slots' })
+export const ENHANCERS =  [
+  persistState('slots', { key: '@angular-redux/store/slots' })
 ];
 
 @NgModule({
@@ -39,14 +40,15 @@ export class StoreModule {
   }
   constructor(
     public store: NgRedux<IAppState>,
-    private _ngRedux: NgRedux<IAppState>,
-    devTools: DevToolsExtension,
     devTool: DevToolsExtension
   ) {
+
     store.configureStore(
       ROOT_REDUCER,
       {},
-      [createLogger()],
-      [...ENHANCERS, devTool.isEnabled() ? devTool.enhancer() : (f) => f]);
+      getConfig().reduxLog ? [createLogger()] : []
+      ,
+      [... ENHANCERS, devTool.isEnabled() ? devTool.enhancer() : (f) => f]
+    );
   }
 }
